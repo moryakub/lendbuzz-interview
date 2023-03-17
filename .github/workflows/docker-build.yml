@@ -8,9 +8,7 @@ on:
 jobs:
 
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
     - name: Cache
@@ -18,13 +16,17 @@ jobs:
       with:
         path: ~/cache
         key: app-cache
-    - name: Build the Docker image
+    - name: docker build
       run: docker build . --tag morya994.jfrog.io/docker/lendbuzz_ex:${{github.sha}}
-    - name: Docker Login
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+    - name: login to jfrog artifactory
       uses: docker/login-action@v2.1.0
       with:
         registry: morya994.jfrog.io/docker/
         username: ${{secrets.JFROG_USERNAME}} 
         password: ${{secrets.JFROG_PASS}}
-    - name: Push the Docker image
+    - name: docker push
       run: docker push morya994.jfrog.io/docker/lendbuzz_ex:${{github.sha}}
+    

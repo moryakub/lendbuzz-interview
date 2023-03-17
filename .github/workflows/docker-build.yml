@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Build and push to jfrog artifactory
 on:
   push:
     branches: [ "main" ]
@@ -18,9 +18,22 @@ jobs:
         key: app-cache
     - name: docker build
       run: docker build . --tag morya994.jfrog.io/docker/lendbuzz_ex:${{github.sha}}
+    - name: upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: myimage
+        path: /tmp/myimage.tar
   publish:
     runs-on: ubuntu-latest
     steps:
+    - name: download artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: myimage
+        path: /tmp
+    - name: load image from artifact
+      run: |
+        docker load --input /tmp/myimage.tar
     - name: login to jfrog artifactory
       uses: docker/login-action@v2.1.0
       with:

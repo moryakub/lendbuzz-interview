@@ -19,10 +19,12 @@ jobs:
         path: ~/cache
         key: app-cache
     - name: Build the Docker image
-      run: docker build . --tag mor-yakobovich-lendbuzz-ex:$(date +%s)
+      run: docker build . --tag mor-yakobovich-lendbuzz-ex:${{github.sha}}
     - name: Docker Login
       uses: docker/login-action@v2.1.0
       with:
         registry: morya994.jfrog.io/docker/
         username: ${{secrets.JFROG_USERNAME}} 
         password: ${{secrets.JFROG_PASS}}
+    - name: Push the Docker image
+      run: docker push mor-yakobovich-lendbuzz-ex:${{github.sha}}

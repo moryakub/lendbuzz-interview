@@ -23,8 +23,10 @@ jobs:
       with:
         name: myimage
         path: /tmp/myimage.tar
+        
   publish:
     runs-on: ubuntu-latest
+    needs: build
     steps:
     - name: download artifact
       uses: actions/download-artifact@v3

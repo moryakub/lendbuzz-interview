@@ -1,5 +1,5 @@
 # What's included
-1. Added DOCKERFILE, healthcheck included
+1. Added Dockerfile, healthcheck included
 2. Github actions to build an updated image and publish it to JFrog artifactory
 3. `run_with_db.sh` script to run the latest version published on the artifactory together with a postgres db
 

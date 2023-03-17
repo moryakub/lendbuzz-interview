@@ -19,7 +19,7 @@ jobs:
         path: ~/cache
         key: app-cache
     - name: Build the Docker image
-      run: docker build . --tag lendbuzz_ex:${{github.sha}}
+      run: docker build . --tag morya994.jfrog.io/docker/lendbuzz_ex:${{github.sha}}
     - name: Docker Login
       uses: docker/login-action@v2.1.0
       with:

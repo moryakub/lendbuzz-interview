@@ -46,5 +46,5 @@ jobs:
         username: ${{secrets.JFROG_USERNAME}} 
         password: ${{secrets.JFROG_PASS}}
     - name: docker push
-      run: docker push morya994.jfrog.io/docker/lendbuzz_ex:${{github.sha}}
+      run: docker push morya994.jfrog.io/docker/lendbuzz_ex:latest
     

@@ -16,13 +16,17 @@ jobs:
       with:
         path: ~/cache
         key: app-cache
-    - name: docker build
-      run: docker build . --tag morya994.jfrog.io/docker/lendbuzz_ex:${{github.sha}}
+    - name: build and export
+      uses: docker/build-push-action@v4
+      with:
+        context: .
+        tags: morya994.jfrog.io/docker/lendbuzz_ex:${{github.sha}}
+        outputs: type=docker,dest=/tmp/lendbuzz_ex.tar
     - name: upload artifact
       uses: actions/upload-artifact@v3
       with:
-        name: myimage
-        path: /tmp/myimage.tar
+        name: lendbuzz_ex_image
+        path: /tmp/lendbuzz_ex.tar
         
   publish:
     runs-on: ubuntu-latest
@@ -31,7 +35,7 @@ jobs:
     - name: download artifact
       uses: actions/download-artifact@v3
       with:
-        name: myimage
+        name: lendbuzz_ex_image
         path: /tmp
     - name: load image from artifact
       run: |

@@ -38,7 +38,7 @@ jobs:
         path: /tmp
     - name: load image from artifact
       run: |
-        docker load --input /tmp/myimage.tar
+        docker load --input /tmp/lendbuzz_ex.tar
     - name: login to jfrog artifactory
       uses: docker/login-action@v2.1.0
       with:

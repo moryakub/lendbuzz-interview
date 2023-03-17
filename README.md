@@ -1,18 +1,3 @@
-# Instructions to run the app
-1. Install Node (Google Instructions)
-
-2. Install Dependencies for the App
-```sh
-npm install
-```
-
-3. Run the app
-```sh
-npm start
-```
-
-(Optional)
-```sh
-DB_NAME={name_of_db} DB_HOST={host_url_of_db} DB_USER={username_of_db} DB_PASS={password_of_db} npm start
-```
-to run `/db_healthcheck` endpoint
+# Instructions to run
+1. make sure to add the jfrog_token.txt file to the directly as it contains the token for the jfrog artifactory
+2. just run `sh run_with_db.sh`

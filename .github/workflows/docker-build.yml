@@ -2,6 +2,8 @@ name: Docker Image CI
 on:
   push:
     branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
 
@@ -18,3 +20,9 @@ jobs:
         key: app-cache
     - name: Build the Docker image
       run: docker build . --tag mor-yakobovich-lendbuzz-ex:$(date +%s)
+    - name: Docker Login
+      uses: docker/login-action@v2.1.0
+      with:
+        registry: morya994.jfrog.io/docker/
+        username: ${{secrets.JFROG_USER}} 
+        password: ${{secrets.JFROG_PASS}}

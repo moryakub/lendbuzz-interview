@@ -17,7 +17,7 @@ jobs:
       uses: docker/build-push-action@v4
       with:
         context: .
-        tags: morya994.jfrog.io/docker/lendbuzz_ex:${{github.sha}}
+        tags: morya994.jfrog.io/docker/lendbuzz_ex:${{github.sha}}, latest
         outputs: type=docker,dest=/tmp/lendbuzz_ex.tar
         cache-from: type=registry,ref=user/app:latest
         cache-to: type=inline

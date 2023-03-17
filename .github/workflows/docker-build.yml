@@ -16,12 +16,16 @@ jobs:
       with:
         path: ~/cache
         key: app-cache
-    - name: build and export
+    - name: setup docker buildx
+      uses: docker/setup-buildx-action@v2
+    - name: build, cache & export
       uses: docker/build-push-action@v4
       with:
         context: .
         tags: morya994.jfrog.io/docker/lendbuzz_ex:${{github.sha}}
         outputs: type=docker,dest=/tmp/lendbuzz_ex.tar
+        cache-from: type=registry,ref=user/app:latest
+        cache-to: type=inline
     - name: upload artifact
       uses: actions/upload-artifact@v3
       with:

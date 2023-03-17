@@ -9,6 +9,6 @@ COPY . .
 
 EXPOSE 3000
 
-HEALTHCHECK --start-period=10s --retries=3 CMD [ "CMD curl --fail http://localhost:3000/db_healthcheck || exit 1" ]
+HEALTHCHECK --start-period=10s --retries=3 CMD [ "CMD wget --no-verbose --tries=1 --spider http://localhost/ || exit 1" ]
 
 CMD [ "npm", "start" ]
